@@ -1,0 +1,29 @@
+<html ng-app="imageTaggerApp">
+<head>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>-->
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
+    <script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/app.js")"></script>
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+    <title>
+        Image Tagging Game
+    </title>
+</head>
+<body>
+<div data-ng-controller="DataController" style="text-align:center;">
+    <div style="margin-top:100px;">
+        <div><input type="text" style="margin-bottm:20px;" data-ng-model="id" placeholder="Enter your id here"/></div>
+        <div><input type="text" style="margin-bottm:20px;" data-ng-model="gameid" placeholder="Enter game id here"/></div>
+        <div><button class="btn btn-primary" type="button" data-ng-click="join();">Join a game</button></div>
+        <div>OR</div>
+        <div><button class="btn btn-primary" type="button" data-ng-click="start();">Start a new game</button></div>
+        <div>Message</div>
+        <div>{{message}}</div>
+        <img src="{{imageurl}}" alt="flickr image here">
+        <div><input type="text" style="margin-top:100px;width:700px;height:35px;margin-bottm:20px;" data-ng-model="guess"/></div>
+        <div><button class="btn btn-primary" type="button" data-ng-click="submitguess();">Submit</button></div>
+    </div>
+
+</div>
+</body>
+</html>
