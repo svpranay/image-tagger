@@ -19,7 +19,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
           // this callback will be called asynchronously
           // when the response is available
           $scope.message = JSON.stringify(data);
-          $scope.websocket = new WebSocket("ws://localhost:9000/start?gameid=" + data.id + "&userid=" + $scope.id);
+          $scope.websocket = new WebSocket("ws://128.199.178.30:9000/start?gameid=" + data.id + "&userid=" + $scope.id);
           $scope.websocket.onmessage = function(event) {
             console.log(JSON.stringify(event.data));
             var d = JSON.parse(event.data);
@@ -43,7 +43,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   };
 
   $scope.join = function () {
-        $scope.websocket = new WebSocket("ws://localhost:9000/start?gameid=" + $scope.gameid + "&userid=" + $scope.id);
+        $scope.websocket = new WebSocket("ws://128.199.178.30:9000/start?gameid=" + $scope.gameid + "&userid=" + $scope.id);
         $scope.websocket.onmessage = function(event) {
             console.log(JSON.stringify(event.data));
             var d = JSON.parse(event.data);
