@@ -3,7 +3,6 @@ var shortnerApp = angular.module('imageTaggerApp', []);
 shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
 
   $scope.items = [];
-  $scope.id = 0;
   $scope.imageurl = "";
   $scope.message = "Press start to start the game";
   $scope.lastmove = "Last move result.";
@@ -19,7 +18,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
           // this callback will be called asynchronously
           // when the response is available
           $scope.message = JSON.stringify(data);
-          $scope.websocket = new WebSocket("ws://128.199.178.30:9001/start?gameid=" + data.id + "&userid=" + $scope.id);
+          $scope.websocket = new WebSocket("ws://128.199.178.30:9001/start?gameid=" + data.id + "&userid=0");
           $scope.websocket.onmessage = function(event) {
             console.log(JSON.stringify(event.data));
             var d = JSON.parse(event.data);
@@ -47,7 +46,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   };
 
   $scope.join = function () {
-        $scope.websocket = new WebSocket("ws://128.199.178.30:9001/start?gameid=" + $scope.gameid + "&userid=" + $scope.id);
+        $scope.websocket = new WebSocket("ws://128.199.178.30:9001/start?gameid=" + $scope.gameid + "&userid=1");
         $scope.websocket.onmessage = function(event) {
             console.log(JSON.stringify(event.data));
             var d = JSON.parse(event.data);
