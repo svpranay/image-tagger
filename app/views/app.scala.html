@@ -10,6 +10,7 @@
     </title>
 </head>
 <body>
+<h2>Image Tagging Game</h2>
 <div data-ng-controller="DataController" style="text-align:center;">
     <div style="margin-top:100px;">
         <div><input type="text" style="margin-bottm:20px;" data-ng-model="id" placeholder="Enter your id here"/></div>
@@ -20,7 +21,9 @@
         <div>Message</div>
         <div>{{message}}</div>
         <img src="{{imageurl}}" alt="flickr image here">
-        <div><input type="text" style="margin-top:100px;width:700px;height:35px;margin-bottm:20px;" data-ng-model="guess"/></div>
+        <div>LAST ROUND RESULT</div>
+        <div>{{lastmove}}</div>
+        <div><input type="text" style="margin-top:30px;width:700px;height:35px;margin-bottm:20px;" data-ng-model="guess"/></div>
         <div><button class="btn btn-primary" type="button" data-ng-click="submitguess();">Submit</button></div>
     </div>
 
