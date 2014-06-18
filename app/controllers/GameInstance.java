@@ -81,7 +81,14 @@ public class GameInstance {
         // send next to both the users
         aout.write(objectMapper.writeValueAsString(next));
         bout.write(objectMapper.writeValueAsString(next));
+	if (currRound == 10) {
+            aout.close();
+            bout.close();
+            return;
+        }
+
     }
+
 
     public void handleMessage(WebSocket.In<String> conn) {
         // For each event received on the socket,
@@ -96,15 +103,8 @@ public class GameInstance {
                     gameRun.btag = move.guess;
                 }
                 if (gameRun.atag != null && gameRun.btag != null) {
-                    if (currRound == 9) {
-                        // only ten rounds
-                        // end game
-                        aout.close();
-                        bout.close();
-                    } else {
-                        // both responses reached else wait for the other guy
-                        advanceGame(gameRun.atag.equalsIgnoreCase(gameRun.btag));
-                    }
+		    // both responses reached else wait for the other guy
+		    advanceGame(gameRun.atag.equalsIgnoreCase(gameRun.btag));
                 }
             }
         });
