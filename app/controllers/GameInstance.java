@@ -31,6 +31,7 @@ public class GameInstance {
     WebSocket.Out<String> aout;
     WebSocket.Out<String> bout;
 
+
     public ObjectMapper objectMapper = new ObjectMapper();
 
     public class GameRun {
@@ -77,16 +78,16 @@ public class GameInstance {
     public void advanceGame(boolean lastMove) throws JsonProcessingException {
         Logger.info("Advancing to the next round : " + lastMove);
         currRound = currRound + 1;
-        Next next = new Next(photoResponse.photos.photo.get(currRound), lastMove, currRound);
-        // send next to both the users
+        Next next;
+        if (currRound < photoResponse.photos.photo.size()) {
+            next = new Next(photoResponse.photos.photo.get(currRound), lastMove, currRound);
+            // send next to both the users
+        } else {
+            // No more photos available
+            next = new Next(null, lastMove, currRound);
+        }
         aout.write(objectMapper.writeValueAsString(next));
         bout.write(objectMapper.writeValueAsString(next));
-	if (currRound == 10) {
-            aout.close();
-            bout.close();
-            return;
-        }
-
     }
 
 
@@ -214,6 +215,7 @@ public class GameInstance {
     // date=2014-01-01&format=json&nojsoncallback=1
     public PhotoResponse getPhotos() throws IOException {
         String date = getRandomDate();
+        Logger.info("Date : " + date);
         Promise<WS.Response> responsePromise = WS.url("https://api.flickr.com/services/rest/").
                 setQueryParameter("method", "flickr.interestingness.getList").
                 setQueryParameter("api_key", "dd0dd46b613e33001287571b5d1edd45").
@@ -227,9 +229,9 @@ public class GameInstance {
     }
 
     public String getRandomDate() {
-        int[] year = {2010, 2011, 2012, 2013, 2014};
-        int randyear = randInt(0,4);
-        int randday = randInt(1,30);
+        int[] year = {2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013};
+        int randyear = randInt(0,8);
+        int randday = randInt(1,28);
         String day = "";
         String month = "";
         if (randday < 10) {
