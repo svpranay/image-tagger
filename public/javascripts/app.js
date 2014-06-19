@@ -22,7 +22,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
           $scope.userid = 0;
           
            $scope.message = JSON.stringify(data);
-          $scope.websocket = new WebSocket("ws://128.199.178.30:9001/start?gameid=" + data.id + "&userid=0");
+          $scope.websocket = new WebSocket("ws://128.199.178.30:80/start?gameid=" + data.id + "&userid=0");
           $scope.websocket.onmessage = function(event) {
             console.log(JSON.stringify(event.data));
             var d = JSON.parse(event.data);
@@ -33,18 +33,18 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
 		} else {
                     $scope.lastmove = "Ah crap!! Try harder.";
 		}
-	    } else {
-		$scope.lastmove = "";
 	    }
             if (d.round == 9) {
                 $scope.lastmove = $scope.lastmove + "Wonderful. You have reached the last round of the game.";
             }
-            $scope.guess = "";
 	    if (d.round == 10) {
 		$scope.lastmove = "Thank you for playing. Game over.";		
 		$scope.showguessbox = false;
 	    } else {
-                $scope.imageurl  = "https://farm" + data.farm + ".staticflickr.com/" + data.server + "/" + data.id + "_" + data.secret + ".jpg";
+		$scope.$apply(function() {
+		    $scope.guess = "";
+                    $scope.imageurl  = "https://farm" + data.farm + ".staticflickr.com/" + data.server + "/" + data.id + "_" + data.secret + ".jpg";
+		});
 	    }
           };
         }).
@@ -55,7 +55,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   };
 
   $scope.join = function () {
-        $scope.websocket = new WebSocket("ws://128.199.178.30:9001/start?gameid=" + $scope.gameid + "&userid=1");
+        $scope.websocket = new WebSocket("ws://128.199.178.30:80/start?gameid=" + $scope.gameid + "&userid=1");
         $scope.websocket.onmessage = function(event) {
             console.log(JSON.stringify(event.data));
             $scope.userid=1;
