@@ -8,7 +8,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   $scope.message = "Press start to start the game or join a game already started.";
   $scope.lastmove = "";
   $scope.showguessbox = true;
-  $scope.rounds_in_game = 2;
+  $scope.rounds_in_game = 10;
   $scope.first_round = 0;
 
   $scope.submitguess = function () {
