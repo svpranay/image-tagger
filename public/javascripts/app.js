@@ -8,13 +8,13 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   $scope.message = "";
   $scope.lastmove = "";
   $scope.showguessbox = true;
-  $scope.rounds_in_game = 7;
+  $scope.rounds_in_game = 2;
   $scope.first_round = 0;
 
   $scope.submitguess = function () {
     var requestData = { "who" : $scope.userid, "guess" : $scope.guess };
     $scope.websocket.send(JSON.stringify(requestData));
-  }
+  };
 
   $scope.start = function () {
     $http({method: 'GET', url: '/game'}).
@@ -31,8 +31,11 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   $scope.join = function () {
         $scope.websocket = new WebSocket("ws://128.199.178.30:80/start?gameid=" + $scope.gameid + "&userid=1");
         $scope.websocket.onmessage = function(event) {
-            $scope.userid=1;
+            $scope.userid = 1;
             handleMove(event, $scope);
+            $scope.$apply(function () {
+                $scope.imageurl = "";
+            });
         };
     };
 
