@@ -5,10 +5,10 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   $scope.userid = 0;
   $scope.items = [];
   $scope.imageurl = "";
-  $scope.message = "Press start to start the game or join a game already started.";
+  $scope.message = "";
   $scope.lastmove = "";
   $scope.showguessbox = true;
-  $scope.rounds_in_game = 10;
+  $scope.rounds_in_game = 7;
   $scope.first_round = 0;
 
   $scope.submitguess = function () {
@@ -20,7 +20,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
     $http({method: 'GET', url: '/game'}).
         success(function(data, status, headers, config) {
           $scope.userid = 0;
-          $scope.message = JSON.stringify(data);
+          $scope.message = "Share this id with your friends to start the game." + JSON.stringify(data);
           $scope.websocket = new WebSocket("ws://128.199.178.30:80/start?gameid=" + data.id + "&userid=0");
           $scope.websocket.onmessage = function(event) {
             handleMove(event, $scope);
