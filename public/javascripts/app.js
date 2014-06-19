@@ -31,7 +31,6 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   $scope.join = function () {
         $scope.websocket = new WebSocket("ws://128.199.178.30:80/start?gameid=" + $scope.gameid + "&userid=1");
         $scope.websocket.onmessage = function(event) {
-            console.log(JSON.stringify(event.data));
             $scope.userid=1;
             handleMove(event, $scope);
         };
@@ -53,7 +52,7 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
         var game_ended = false;
         if (d.round == $scope.rounds_in_game) {
             console.log("End the game now.");
-            $scope.lastmove = "The game has ended.";
+            $scope.lastmove = $scope.lastmove + " " + "Unfortunately, things always come to an end.";
             game_ended = true;
         }
         $scope.$apply(function() {

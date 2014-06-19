@@ -13,18 +13,21 @@
 <div data-ng-controller="DataController" style="text-align:center;">
     <h2>Image Tagging Game</h2>
     <h4>Guess a word that aptly describes a random interesting image and see if your friend can think of the same word.</h4>
-    <div style="margin-top:100px;">
-        <div><input type="text" style="margin-bottm:20px;" data-ng-model="gameid" placeholder="Enter game id here"/></div>
-        <div><button class="btn btn-primary" type="button" data-ng-click="join();">Join a game</button></div>
-        <div>OR</div>
-        <div><button class="btn btn-primary" type="button" data-ng-click="start();">Start a new game</button></div>
-        <div>Message</div>
-        <div>{{message}}</div>
-        <img data-ng-src="{{imageurl}}" alt="flickr image here">
-        <div>LAST ROUND RESULT</div>
-        <div>{{lastmove}}</div>
-        <div><input data-ng-show="showguessbox" type="text" style="margin-top:30px;width:700px;height:35px;margin-bottm:20px;" data-ng-model="guess"/></div>
-        <div><button class="btn btn-primary" type="button" data-ng-click="submitguess();">Submit</button></div>
+    <h5>Start a game, invite your friends using the game id and have fun.</h5>
+    <div style="margin-top:25px;">
+        <div>
+            <div><input type="text" style="margin-bottm:20px;" data-ng-model="gameid" placeholder="Enter game id here"/></div>
+            <div><button class="btn btn-primary" type="button" data-ng-click="join();">Join a game</button></div>
+        </div>
+        <div>---------- OR -----------</div>
+        <div>
+            <div><button class="btn btn-primary" type="button" data-ng-click="start();">Start a new game</button></div>
+        </div>
+        <div style="margin-top:30px;">{{message}}</div>
+        <img data-ng-src="{{imageurl}}" alt="Flickr image here">
+        <div style="margin-top:30px;">{{lastmove}}</div>
+        <div data-ng-show="showguessbox"><input type="text" style="margin-top:30px;width:700px;height:35px;margin-bottm:20px;" data-ng-model="guess"/></div>
+        <div style="margin-top:30px;" data-ng-show="showguessbox"><button class="btn btn-primary" type="button" data-ng-click="submitguess();">Submit The Tag</button></div>
     </div>
 </div>
 </body>

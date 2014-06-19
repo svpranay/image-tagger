@@ -104,8 +104,8 @@ public class GameInstance {
                     gameRun.btag = move.guess;
                 }
                 if (gameRun.atag != null && gameRun.btag != null) {
-		    // both responses reached else wait for the other guy
-		    advanceGame(gameRun.atag.equalsIgnoreCase(gameRun.btag));
+                    // both responses reached else wait for the other guy
+                    advanceGame(gameRun.atag.equalsIgnoreCase(gameRun.btag));
                 }
             }
         });
