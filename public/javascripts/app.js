@@ -14,6 +14,9 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
   $scope.submitguess = function () {
     var requestData = { "who" : $scope.userid, "guess" : $scope.guess };
     $scope.websocket.send(JSON.stringify(requestData));
+    $scope.$apply(function () {
+        $scope.imageurl = "";
+    });
   };
 
   $scope.start = function () {
@@ -33,9 +36,6 @@ shortnerApp.controller('DataController', function ($scope, $http, $timeout) {
         $scope.websocket.onmessage = function(event) {
             $scope.userid = 1;
             handleMove(event, $scope);
-            $scope.$apply(function () {
-                $scope.imageurl = "";
-            });
         };
     };
 
